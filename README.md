@@ -1,59 +1,37 @@
-# QMK Userspace
+# Personal keymaps
 
-This is a template repository which allows for an external set of QMK keymaps to be defined and compiled. This is useful for users who want to maintain their own keymaps without having to fork the [main QMK repository](https://github.com/qmk/qmk_firmware). You must still fork the main QMK repository if writing firmware for a *new* keyboard.
+This is a repository containing key maps for custom split ergo keyboards that I have used.
 
-## Howto configure your build targets
+This repo is forked from [QMK's userspace template](https://github.com/qmk/qmk_userspace).
+See the [main QMK repository](https://github.com/qmk/qmk_firmware) for more information.
 
-1. Run the normal `qmk setup` procedure if you haven't already done so -- see [QMK Docs](https://docs.qmk.fm/#/newbs) for details.
-1. Fork this repository
-1. Clone your fork to your local machine
-1. Enable userspace in QMK config using `qmk config user.overlay_dir="$(realpath qmk_userspace)"`
-1. Add a new keymap for your board using `qmk new-keymap`
-    * This will create a new keymap in the `keyboards` directory, in the same location that would normally be used in the main QMK repository. For example, if you wanted to add a keymap for the Planck, it will be created in `keyboards/planck/keymaps/<your keymap name>`
-    * You can also create a new keymap using `qmk new-keymap -kb <your_keyboard> -km <your_keymap>`
-    * Alternatively, add your keymap manually by placing it in the location specified above.
-    * `layouts/<layout name>/<your keymap name>/keymap.*` is also supported if you prefer the layout system
-1. Add your keymap(s) to the build by running `qmk userspace-add -kb <your_keyboard> -km <your_keymap>`
-    * This will automatically update your `qmk.json` file
-    * Corresponding `qmk userspace-remove -kb <your_keyboard> -km <your_keymap>` will delete it
-    * Listing the build targets can be done with `qmk userspace-list`
-1. Commit your changes
+## Layout considerations
 
-## Howto build with GitHub
+My intent when using a split keyboard is comfort over raw typing speed.  Thankfully, these two things tend to go hand in hand.  While not opposed to a number row up top, I find that stretching my fingers up to higher keys is more difficult than curling them down for lower ones.  Therefore neither of my daily drivers have a number row (plus I prefer to use a numpad anyway).
 
-1. In the GitHub Actions tab, enable workflows
-1. Push your changes above to your forked GitHub repository
-1. Look at the GitHub Actions for a new actions run
-1. Wait for the actions run to complete
-1. Inspect the Releases tab on your repository for the latest firmware build
+Another aspect that goes into my mapping decisions is the fact that I am a programmer. Therefore, numbers and symbols need to be easily accessible.  I found [Designing a Symbol Layer](https://getreuer.info/posts/keyboards/symbol-layer/index.html) by Pascal Getreuer to be very influential in deciding my symbol layers.  I blatantly copied his V1, and later his V2, symbol layers.
 
-## Howto build locally
+## Maintained Keyboards
 
-1. Run the normal `qmk setup` procedure if you haven't already done so -- see [QMK Docs](https://docs.qmk.fm/#/newbs) for details.
-1. Fork this repository
-1. Clone your fork to your local machine
-1. `cd` into this repository's clone directory
-1. Set global userspace path: `qmk config user.overlay_dir="$(realpath .)"` -- you MUST be located in the cloned userspace location for this to work correctly
-    * This will be automatically detected if you've `cd`ed into your userspace repository, but the above makes your userspace available regardless of your shell location.
-1. Compile normally: `qmk compile -kb your_keyboard -km your_keymap` or `make your_keyboard:your_keymap`
+### Charybdis
 
-Alternatively, if you configured your build targets above, you can use `qmk userspace-compile` to build all of your userspace targets at once.
+The Charybdis Mini by [BastardKB](https://bastardkb.com) is currently my daily driver at work.  It features a concave finger well for comfort and a full-size trackball for seamless switching between a pointing device and typing.  After using this keyboard, it is very difficult to go back to a board that doesn't have an integrated pointing device.
 
-## Extra info
+One unfortunate downside of the open frame design of the chassis is that the PCB is susceptible to electric shock if you angle your thumb off center.  I discovered this the hard way.  The good news is a quick solder job and an extra config header are enough to swap the pins to an unused one on the micro.
 
-If you wish to point GitHub actions to a different repository, a different branch, or even a different keymap name, you can modify `.github/workflows/build_binaries.yml` to suit your needs.
+### Klor
 
-To override the `build` job, you can change the following parameters to use a different QMK repository or branch:
-```
-    with:
-      qmk_repo: qmk/qmk_firmware
-      qmk_ref: master
-```
+The Klor by Geigeigeist is a feature-rich keyboard with splayed keys that better match the natural resting point of my fingers.  I keep this one at home when I don't need a full-size keyboard.
 
-If you wish to manually manage `qmk_firmware` using git within the userspace repository, you can add `qmk_firmware` as a submodule in the userspace directory instead. GitHub Actions will automatically use the submodule at the pinned revision if it exists, otherwise it will use the default latest revision of `qmk_firmware` from the main repository.
+My config for the Klor features a custom animation on the right half of the keyboard.  A few years back, this [video](https://www.youtube.com/watch?v=ChmV64OPc6k) by [alekskrgt](https://github.com/aleksbrgt) went around, featuring a glitching transition between two still frames, one showing the Arasaka logo from the Cyberpunk universe and the other showing a QR code for more information. His [implementation](https://gist.github.com/aleksbrgt/48a8eb932dc1b6aa8f4b36ecd7c380d0) stored every frame of the animation as a full still image and then cycled through each still frame sequentially.
 
-This can also be used to control which fork is used, though only upstream `qmk_firmware` will have support for external userspace until other manufacturers update their forks.
+I discovered that a very similar effect could be achieved by leveraging OLED scrolling functions already present in QMK.  My implementation allows for one to store as many bitmaps as desired and cycle between all of them using the same "glitch" effect, reducing the storage requirement at the cost of a less flashy animation.
 
-1. (First time only) `git submodule add https://github.com/qmk/qmk_firmware.git`
-1. (To update) `git submodule update --init --recursive`
-1. Commit your changes to your userspace repository
+## Others not included
+
+I have collected a couple other keyboards that aren't in rotation right now.
+
+ - Lily58
+ - Sofle Choc
+ - Killer Whale
+ - Chocofi
