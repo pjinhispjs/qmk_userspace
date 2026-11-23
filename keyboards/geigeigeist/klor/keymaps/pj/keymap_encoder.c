@@ -1,0 +1,11 @@
+#include QMK_KEYBOARD_H
+
+#if defined(ENCODER_MAP_ENABLE)
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
+    [0] = { ENCODER_CCW_CW(KC_DOWN, KC_UP),          ENCODER_CCW_CW(KC_LEFT, KC_RGHT) },
+    [1] =  { ENCODER_CCW_CW(UG_HUEU, KC_TAB),         ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [2] =  { ENCODER_CCW_CW(UG_VALD, UG_VALU),        ENCODER_CCW_CW(UG_SPDD, UG_SPDU) },
+    [3] = { ENCODER_CCW_CW(UG_PREV, UG_NEXT),        ENCODER_CCW_CW(UG_SATD, UG_SATU) },
+};
+
+#endif
