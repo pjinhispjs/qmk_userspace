@@ -25,9 +25,9 @@ The Klor by Geigeigeist is a feature-rich keyboard with splayed keys that better
 
 My config for the Klor features a custom animation on the right half of the keyboard.  A few years back, this [video](https://www.youtube.com/watch?v=ChmV64OPc6k) by [alekskrgt](https://github.com/aleksbrgt) went around, featuring a glitching transition between two still frames, one showing the Arasaka logo from the Cyberpunk universe and the other showing a QR code for more information. His [implementation](https://gist.github.com/aleksbrgt/48a8eb932dc1b6aa8f4b36ecd7c380d0) stored every frame of the animation as a full still image and then cycled through each still frame sequentially.
 
-<img width="320" height="240" alt="output" src="https://github.com/user-attachments/assets/2023ce79-23c7-4391-806c-073f2d5e3522" />
+<img width="400" height="720" alt="animation" src="https://github.com/user-attachments/assets/509b5dff-5803-4d6b-8b38-e42c722c3dde" />
 
-I discovered that a very similar effect could be achieved by leveraging OLED scrolling functions already present in QMK.  My implementation allows for one to store as many bitmaps as desired and cycle between all of them using the same "glitch" effect, reducing the storage requirement at the cost of a less flashy animation.
+I discovered that a very similar effect could be achieved by leveraging OLED scrolling functions already present in QMK.  My implementation allows for one to store as many bitmaps as desired and cycle between all of them using the same "glitch" effect, reducing the storage requirement at the cost of a less refined animation.
 
 ## Others not included
 
